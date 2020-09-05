@@ -69,6 +69,12 @@ router.post("/signin", (req, res) => {
         .then((domatch) => {
           if (domatch) {
             // res.json({message:"successfully logined"});
+            transporter.sendMail({
+              to:savedUser.email,
+              from:"no.reply.mywebapp@gmail.com",
+              subject:"Login alert",
+              html:"<h1>You just logined to my app</h1>"
+            })
             const token = jwt.sign({ _id: savedUser._id }, JWT_SECRET);
             const {_id,name,email,followers,following,pic}=savedUser
             res.json({ token ,user:{_id,name,email,followers,following,pic}});
