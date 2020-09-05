@@ -5,14 +5,17 @@ const requirelogin=require('../middleware/requirelogin');
 const Post=mongoose.model("Post");
 
 router.get('/allpost',requirelogin,(req,res)=>{
-    Post.find().populate("postedBy","_id name").populate("comments.postedBy","_id name").then(posts=>{
+    Post.find().populate("postedBy","_id name").populate("comments.postedBy","_id name")
+    .sort('-createdAt')
+    .then(posts=>{
         res.json({posts});
     }).catch(err=>{
         console.log(err);
     })
 })
 router.get('/getsubpost',requirelogin,(req,res)=>{
-    Post.find({postedBy:{$in:req.user.following}}).populate("postedBy","_id name").populate("comments.postedBy","_id name").then(posts=>{
+    Post.find({postedBy:{$in:req.user.following}}).populate("postedBy","_id name").populate("comments.postedBy","_id name")
+    .sort('-createdAt').then(posts=>{
         res.json({posts});
     }).catch(err=>{
         console.log(err);

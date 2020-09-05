@@ -1,13 +1,10 @@
 import React,{useState,useContext} from "react";
 import { Link, useHistory } from "react-router-dom";
-import {UserContext} from '../../App'
 
 
 import M from 'materialize-css'
-const Login = () => {
-  const {state,dispatch}=useContext(UserContext)
+const Reset = () => {
   const History = useHistory();
-  const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
   const PostData = () => {
@@ -18,27 +15,22 @@ const Login = () => {
       });
       return
     }
-    fetch("/signin", {
+    fetch("/resetpassword", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        password,
         email
       }),
     })
       .then((res) => res.json())
       .then(data => {
-          console.log(data);
         if (data.error) {
           M.toast({ html: data.error, classes: "#e53935 red darken-1" });
         } else {
-          localStorage.setItem("jwt",data.token)
-          localStorage.setItem("user",JSON.stringify( data.user))
-          dispatch({type:"USER",payload:data.user})
-          M.toast({ html: "Successfully logined", classes: "#43a047 green darken-1" });
-          History.push("/");
+          M.toast({ html: data.message, classes: "#43a047 green darken-1" });
+          History.push("/signin");
         }
       })
       .catch((err) => {
@@ -56,24 +48,12 @@ const Login = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <input
-          type="password"
-          placeholder="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
         <button className="btn waves-effect waves-light #42a5f5 blue lighten-1" onClick={()=>PostData()}>
-          Login
+          Reset
         </button>
-        <h5>
-          <Link to="/signup">Don't have one?</Link>
-        </h5>
-        <h5>
-          <Link to="/reset">Forget password?</Link>
-        </h5>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Reset;
