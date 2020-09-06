@@ -2,10 +2,17 @@
 a{
     color:black !important
 }
+@media only screen and (max-width: 992px) 
+{
+  nav  .brand-logo {
+    left: 20%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
 
-.brand-logo,h2{
-    font-family: 'Grand Hotel', cursive;
+    
 }
+}
+
 
 .auth-card{
     padding: 20px;
@@ -28,9 +35,6 @@ a{
     width: 30%;
 }
 
-.home{
-
-}
 
 
 
@@ -54,4 +58,11 @@ a{
 
 .collection-item{
     width: 100%;
+}
+@media screen and (min-width:633px){
+    nav #vertical{display: none;}
+}
+@media screen and (max-width:633px)
+{
+    nav .something{display: none;}
 }

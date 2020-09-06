@@ -30,7 +30,7 @@ const Login = () => {
     })
       .then((res) => res.json())
       .then(data => {
-          console.log(data);
+          // console.log(data);
         if (data.error) {
           M.toast({ html: data.error, classes: "#e53935 red darken-1" });
         } else {
