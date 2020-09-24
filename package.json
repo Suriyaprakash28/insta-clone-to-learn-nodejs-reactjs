@@ -5,7 +5,7 @@
   "homepage": "https://suriyaprakash28.github.io/insta-clone-to-learn-nodejs-reactjs/",
   "scripts": {
     "start": "node app.js",
-    "build":"tsc",
+    "build":"react-scripts build",
     "predeploy":"npm run build",
     "deploy":"gh-pages -d build",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
